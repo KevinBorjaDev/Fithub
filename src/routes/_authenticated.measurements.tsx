@@ -56,7 +56,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import logoAsset from "@/assets/diego-rivera-logo-new.png.asset.json";
+import { LOGO_URL } from "@/lib/assets";
 
 export const Route = createFileRoute("/_authenticated/measurements")({
   head: () => ({
@@ -1149,7 +1149,7 @@ function ComparativeView({ rows, profile }: { rows: Row[]; profile: PatientProfi
   async function downloadPdf() {
     try {
       setDownloading(true);
-      const logoDataUrl = await fetchImageAsDataUrl(logoAsset.url);
+      const logoDataUrl = await fetchImageAsDataUrl(LOGO_URL);
       const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
       const pageW = doc.internal.pageSize.getWidth();
       const pageH = doc.internal.pageSize.getHeight();

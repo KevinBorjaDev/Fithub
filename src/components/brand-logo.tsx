@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import logoAsset from "@/assets/diego-rivera-logo-new.png.asset.json";
+import { LOGO_URL } from "@/lib/assets";
 
 interface BrandLogoProps {
   size?: "sm" | "md" | "lg";
@@ -25,7 +25,7 @@ export function BrandLogo({ size = "md", showText = true, className }: BrandLogo
         aria-hidden
       >
         <img
-          src={logoAsset.url}
+          src={LOGO_URL}
           alt="Diego Rivera - Nutricionista"
           className="h-full w-full object-contain p-1"
         />

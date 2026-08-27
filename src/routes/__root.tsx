@@ -13,7 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AuthProvider } from "@/hooks/use-auth";
 import { Toaster } from "@/components/ui/sonner";
-import logoAsset from "@/assets/diego-rivera-logo-new.png.asset.json";
+import { LOGO_URL } from "@/lib/assets";
 import { AppLoadingOverlay } from "@/components/app-loading-overlay";
 
 function NotFoundComponent() {
@@ -103,8 +103,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: logoAsset.url, type: "image/png" },
-      { rel: "apple-touch-icon", href: logoAsset.url },
+      { rel: "icon", href: LOGO_URL, type: "image/png" },
+      { rel: "apple-touch-icon", href: LOGO_URL },
       { rel: "manifest", href: "/manifest.webmanifest" },
     ],
     scripts: [

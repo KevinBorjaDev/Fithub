@@ -2,7 +2,7 @@ import { useIsMutating } from "@tanstack/react-query";
 import { useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-import loadingLogoAsset from "@/assets/diego-rivera-loading-logo.jpeg.asset.json";
+import { LOADING_LOGO_URL } from "@/lib/assets";
 import { useAuth } from "@/hooks/use-auth";
 import { cn } from "@/lib/utils";
 
@@ -91,7 +91,7 @@ export function AppLoadingOverlay() {
       <div className="relative flex flex-col items-center gap-5 text-center">
         <div className="app-loading-logo-shell">
           <img
-            src={loadingLogoAsset.url}
+            src={LOADING_LOGO_URL}
             alt="Diego Rivera Nutricionista"
             className="app-loading-logo h-full w-full object-cover"
             decoding="async"

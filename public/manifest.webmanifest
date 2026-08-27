@@ -9,8 +9,8 @@
   "theme_color": "#1a2416",
   "icons": [
     {
-      "src": "/__l5e/assets-v1/2c005717-de12-4114-a676-b4cf78f60d80/diego-rivera-logo-new.png",
-      "sizes": "1024x1024",
+      "src": "/diego-rivera-logo.png",
+      "sizes": "682x687",
       "type": "image/png"
     }
   ]

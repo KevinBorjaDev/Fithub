@@ -36,7 +36,7 @@ import { Progress } from "@/components/ui/progress";
 import { Checkbox } from "@/components/ui/checkbox";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import logoAsset from "@/assets/diego-rivera-logo-new.png.asset.json";
+import { LOGO_URL } from "@/lib/assets";
 import { Download } from "lucide-react";
 
 async function fetchLogoDataUrl(url: string): Promise<string> {
@@ -2352,7 +2352,7 @@ function SessionReport({
   async function downloadReportPdf() {
     try {
       setDownloadingPdf(true);
-      const logoDataUrl = await fetchLogoDataUrl(logoAsset.url);
+      const logoDataUrl = await fetchLogoDataUrl(LOGO_URL);
       const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
       const pageW = doc.internal.pageSize.getWidth();
       const pageH = doc.internal.pageSize.getHeight();
