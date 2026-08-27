@@ -1,0 +1,1 @@
+ALTER TABLE public.training_plans ADD COLUMN IF NOT EXISTS days_per_week smallint NOT NULL DEFAULT 7 CHECK (days_per_week BETWEEN 1 AND 7);

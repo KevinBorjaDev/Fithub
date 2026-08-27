@@ -1,0 +1,9 @@
+# Lic. Diego Rivera — Nutrición y Entrenamiento
+
+> Plataforma privada de seguimiento nutricional y deportivo del Lic. Diego Rivera. Los pacientes acceden con credenciales para gestionar planes, mediciones, fotos de progreso y rutinas.
+
+Los módulos internos (dashboard, plan, entrenamiento, mediciones, fotos, documentos, encuestas) requieren autenticación y no están disponibles para lectura pública.
+
+## Pages
+
+- [Ingresar](/auth): Acceso al panel personal de pacientes.

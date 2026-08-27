@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.protect_program_dates() FROM PUBLIC, anon, authenticated;

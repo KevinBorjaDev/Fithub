@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /$
+Allow: /auth
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /admin-surveys
+Disallow: /documents
+Disallow: /measurements
+Disallow: /photos
+Disallow: /plan
+Disallow: /program
+Disallow: /survey
+Disallow: /training
+Disallow: /reset-password
+
+Sitemap: https://my-fit-coach-53.lovable.app/sitemap.xml
