@@ -1387,8 +1387,8 @@ function VideoCard({
   };
 
   const openVideo = () => {
-    // Break out of the Lovable preview iframe / avoid popup blockers by
-    // navigating the top-most window when possible, else fall back to _blank.
+    // Si la app corre embebida en un iframe, abrir desde la ventana superior
+    // evita los bloqueadores de popups; si falla, se navega en la misma pestaña.
     try {
       const top = window.top ?? window;
       const win = top.open(video.url, "_blank", "noopener,noreferrer");

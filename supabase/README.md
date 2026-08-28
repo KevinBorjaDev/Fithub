@@ -30,6 +30,11 @@ En *Authentication → Providers*:
   registrando como callback la URL que muestra Supabase
   (`https://<PROJECT_REF>.supabase.co/auth/v1/callback`).
 
+La pantalla de acceso consulta `/auth/v1/settings` al cargar y **habilita los
+botones de Google y Apple solo si el proveedor está activo** en este dashboard.
+Mientras no lo estén, los botones aparecen deshabilitados con un aviso, en vez
+de fallar al pulsarlos. No hay que tocar código al activarlos.
+
 En *Authentication → URL Configuration*:
 
 - **Site URL**: la URL de producción.

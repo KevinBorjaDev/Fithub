@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
+import { signInWithProvider, useEnabledOAuthProviders } from "@/integrations/supabase/oauth";
 import { useAuth } from "@/hooks/use-auth";
 import { BrandLogo } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
@@ -46,6 +46,8 @@ function AuthPage() {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [busy, setBusy] = useState(false);
+  const providers = useEnabledOAuthProviders();
+  const anyProviderEnabled = Boolean(providers.data?.google || providers.data?.apple);
 
   useEffect(() => {
     if (!loading && session) navigate({ to: "/dashboard", replace: true });
@@ -100,25 +102,12 @@ function AuthPage() {
     toast.success("Revisa tu correo para restablecer la contraseña.");
   };
 
-  const handleGoogle = async () => {
+  const handleOAuth = async (provider: "google" | "apple", label: string) => {
     setBusy(true);
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-    });
-    if (result.error) {
+    const { error } = await signInWithProvider(provider);
+    if (error) {
       setBusy(false);
-      toast.error("No se pudo iniciar sesión con Google");
-    }
-  };
-
-  const handleApple = async () => {
-    setBusy(true);
-    const result = await lovable.auth.signInWithOAuth("apple", {
-      redirect_uri: window.location.origin,
-    });
-    if (result.error) {
-      setBusy(false);
-      toast.error("No se pudo iniciar sesión con Apple");
+      toast.error(`No se pudo iniciar sesión con ${label}`);
     }
   };
 
@@ -258,8 +247,8 @@ function AuthPage() {
                   type="button"
                   variant="outline"
                   className="w-full"
-                  onClick={handleGoogle}
-                  disabled={busy}
+                  onClick={() => handleOAuth("google", "Google")}
+                  disabled={busy || !providers.data?.google}
                 >
                   <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24" aria-hidden>
                     <path
@@ -273,14 +262,20 @@ function AuthPage() {
                   type="button"
                   variant="outline"
                   className="w-full mt-2"
-                  onClick={handleApple}
-                  disabled={busy}
+                  onClick={() => handleOAuth("apple", "Apple")}
+                  disabled={busy || !providers.data?.apple}
                 >
                   <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24" aria-hidden fill="currentColor">
                     <path d="M16.365 12.72c-.02-2.03 1.66-3.01 1.73-3.06-.94-1.38-2.41-1.57-2.93-1.59-1.25-.13-2.44.73-3.08.73-.64 0-1.62-.71-2.67-.69-1.37.02-2.64.8-3.35 2.03-1.43 2.48-.36 6.15 1.02 8.17.68.99 1.48 2.1 2.53 2.06 1.02-.04 1.4-.66 2.63-.66 1.23 0 1.58.66 2.65.64 1.09-.02 1.79-1 2.46-1.99.78-1.14 1.1-2.25 1.11-2.31-.02-.01-2.13-.82-2.15-3.24zM14.4 6.36c.56-.68.94-1.62.84-2.56-.81.03-1.79.54-2.37 1.22-.52.6-.97 1.56-.85 2.48.9.07 1.82-.46 2.38-1.14z" />
                   </svg>
                   Apple
                 </Button>
+                {!providers.isLoading && !anyProviderEnabled && (
+                  <p className="mt-2 text-center text-xs text-muted-foreground">
+                    El acceso con Google y Apple aún no está disponible. Ingresa con tu correo y
+                    contraseña.
+                  </p>
+                )}
               </>
             )}
           </CardContent>
